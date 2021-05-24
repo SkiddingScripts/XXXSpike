@@ -64,7 +64,7 @@ function ValiantAimHacks.updateCircle()
         circle.Visible = ValiantAimHacks.ShowFOV
         circle.Radius = (ValiantAimHacks.FOV * 3)
         circle.Position = Vector2new(Mouse.X, Mouse.Y + GetGuiInset(GuiService).Y)
-        circle.NumSides = ValiantAimHacks.FOVSides
+        circle.NumSides = 12
 
         -- // Return circle
         return circle
