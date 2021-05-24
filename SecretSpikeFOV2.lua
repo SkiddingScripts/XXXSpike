@@ -12,6 +12,25 @@ local LocalPlayer = Players.LocalPlayer
 local CurrentCamera = Workspace.CurrentCamera
 local Mouse = LocalPlayer:GetMouse()
 
+-- // Optimisation Vars for FOV eXX DEE
+local Drawingnew = Drawing.new
+local Color3fromRGB = Color3.fromRGB
+local Vector2new = Vector2.new
+local GetGuiInset = GuiService.GetGuiInset
+local Randomnew = Random.new
+local mathfloor = math.floor
+local CharacterAdded = LocalPlayer.CharacterAdded
+local CharacterAddedWait = CharacterAdded.Wait
+local WorldToViewportPoint = CurrentCamera.WorldToViewportPoint
+local RaycastParamsnew = RaycastParams.new
+local EnumRaycastFilterTypeBlacklist = Enum.RaycastFilterType.Blacklist
+local Raycast = Workspace.Raycast
+local GetPlayers = Players.GetPlayers
+local Instancenew = Instance.new
+local IsDescendantOf = Instancenew("Part").IsDescendantOf
+local FindFirstChildWhichIsA = Instancenew("Part").FindFirstChildWhichIsA
+local FindFirstChild = Instancenew("Part").FindFirstChild
+
 -- // Silent Aim Vars
 getgenv().ValiantAimHacks = {
     SilentAimEnabled = true,
@@ -31,10 +50,26 @@ getgenv().ValiantAimHacks = {
     BlacklistedPlayers = {LocalPlayer},
     WhitelistedPUIDs = {91318356},
 }
--- // load FOV ???
-local ValiantAimHacks = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Stefanuk12/ROBLOX/master/Universal/Experimental%20Silent%20Aim%20Module.lua"))()
+
 local ValiantAimHacks = getgenv().ValiantAimHacks
-ValiantAimHacks.updateCircle()
+-- // Show FOV
+local circle = Drawingnew("Circle")
+circle.Transparency = 1
+circle.Thickness = 2
+circle.Color = Color3fromRGB(231, 84, 128)
+circle.Filled = false
+function ValiantAimHacks.updateCircle()
+    if (circle) then
+        -- // Set Circle Properties
+        circle.Visible = ValiantAimHacks.ShowFOV
+        circle.Radius = (ValiantAimHacks.FOV * 3)
+        circle.Position = Vector2new(Mouse.X, Mouse.Y + GetGuiInset(GuiService).Y)
+        circle.NumSides = ValiantAimHacks.FOVSides
+
+        -- // Return circle
+        return circle
+    end
+end
 
 -- // Custom Functions
 calcChance = function(percentage)
