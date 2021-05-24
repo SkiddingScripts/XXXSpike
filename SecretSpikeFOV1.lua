@@ -31,6 +31,10 @@ getgenv().ValiantAimHacks = {
     BlacklistedPlayers = {LocalPlayer},
     WhitelistedPUIDs = {91318356},
 }
+-- // load FOV ???
+local ValiantAimHacks = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Stefanuk12/ROBLOX/master/Universal/Experimental%20Silent%20Aim%20Module.lua"))()
+local ValiantAimHacks = getgenv().ValiantAimHacks
+ValiantAimHacks.updateCircle()
 
 -- // Custom Functions
 calcChance = function(percentage)
