@@ -32,19 +32,20 @@ getgenv().ValiantAimHacks = {
     WhitelistedPUIDs = {91318356},
 }
 
--- // Show FOV
-local circle = Drawing.new("Circle")
-circle.Transparency = 0
+local ValiantAimHacks = getgenv().ValiantAimHacks
+
+local circle = Drawingnew("Circle")
+circle.Transparency = 1
 circle.Thickness = 2
-circle.Color = Color3.fromRGB(231, 84, 128)
-circle.NumSides = 12
+circle.Color = Color3fromRGB(231, 84, 128)
 circle.Filled = false
 function ValiantAimHacks.updateCircle()
     if (circle) then
         -- // Set Circle Properties
         circle.Visible = ValiantAimHacks.ShowFOV
         circle.Radius = (ValiantAimHacks.FOV * 3)
-        circle.Position = Vector2.new(Mouse.X, Mouse.Y + GuiService:GetGuiInset().Y)
+        circle.Position = Vector2new(Mouse.X, Mouse.Y + GetGuiInset(GuiService).Y)
+        circle.NumSides = ValiantAimHacks.FOVSides
 
         -- // Return circle
         return circle
