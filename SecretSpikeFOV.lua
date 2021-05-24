@@ -32,26 +32,6 @@ getgenv().ValiantAimHacks = {
     WhitelistedPUIDs = {91318356},
 }
 
-local ValiantAimHacks = getgenv().ValiantAimHacks
-
-local circle = Drawingnew("Circle")
-circle.Transparency = 0
-circle.Thickness = 2
-circle.Color = Color3fromRGB(231, 84, 128)
-circle.Filled = false
-function ValiantAimHacks.updateCircle()
-    if (circle) then
-        -- // Set Circle Properties
-        circle.Visible = ValiantAimHacks.ShowFOV
-        circle.Radius = (ValiantAimHacks.FOV * 3)
-        circle.Position = Vector2new(Mouse.X, Mouse.Y + GetGuiInset(GuiService).Y)
-        circle.NumSides = ValiantAimHacks.FOVSides
-
-        -- // Return circle
-        return circle
-    end
-end
-
 -- // Custom Functions
 calcChance = function(percentage)
     percentage = math.floor(percentage)
