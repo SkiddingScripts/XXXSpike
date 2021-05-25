@@ -178,6 +178,7 @@ end
  -- // Find Playe ron Mouse
 function ValiantAimHacks.FindPlrOnMouse()
 		for i, v in pairs(game.Workspace:FindPartsInRegion3(Region3.new(LocalPlayer:GetMouse().Hit.CFrame, LocalPlayer:GetMouse().Hit.CFrame))) do
+				print(v)
 			local plr = game.Players:GetPlayerFromCharacter(v.Parent)
 			if plr ~= nil and plr ~= LocalPlayer then
 				return Vector3.new(plr)
