@@ -180,7 +180,7 @@ function ValiantAimHacks.FindPlrOnMouse()
 		for i, v in pairs(game.Workspace:FindPartsInRegion3(Region3.new(LocalPlayer:GetMouse().Hit.Position, LocalPlayer:GetMouse().Hit.Position))) do
 			local plr = game.Players:GetPlayerFromCharacter(v.Parent)
 			if plr ~= nil and plr ~= LocalPlayer then
-				return plr
+				return plr.Character.Head.CFrame
 			end
 		end
 		return nil
