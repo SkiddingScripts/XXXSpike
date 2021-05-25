@@ -245,16 +245,12 @@ function ValiantAimHacks.getClosestPlayerToCursor()
                 if ValiantAimHacks.lkey ~= nil then 
                 Mouse.KeyUp:Connect(function(k)
                     if k == ValiantAimHacks.lkey then
-                           local  Plr = ValiantAimHacks.FindPlayerOnMouse()
-									if Plr == nil then
-										elseif ValiantAimHacks.FindPlayerOnMouse() == nil then
-													ValiantAimHacks.Selected = (Chance and ClosestPlayer or LocalPlayer)		
-															end
-                                if Plr ~= nil and Plr.Character and Plr.Character:FindFirstChild("Head") and Plr.Character:FindFirstChild("UpperTorso") then
-                                    ValiantAimHacks.Selected = (Chance and Plr or LocalPlayer)			
-                                       	 				elseif k == ValiantAimHacks.ulkey then
-                                     						ValiantAimHacks.Selected = (Chance and ClosestPlayer or LocalPlayer)
-                        end
+                           local  Plr = ValiantAimHacks.FindPlrOnMouse()
+                                					if Plr ~= nil and Plr.Character and Plr.Character:FindFirstChild("Head") and Plr.Character:FindFirstChild("UpperTorso") then
+                                    					ValiantAimHacks.Selected = (Chance and Plr or LocalPlayer)			
+                                       	 					elseif k == ValiantAimHacks.ulkey then
+                                     							ValiantAimHacks.Selected = (Chance and ClosestPlayer or LocalPlayer)
+                        	end
 						end
                     end)
                 end
