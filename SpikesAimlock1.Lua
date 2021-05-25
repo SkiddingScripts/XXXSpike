@@ -177,10 +177,10 @@ end
 
  -- // Find Playe ron Mouse
 function ValiantAimHacks.FindPlrOnMouse()
-		for i, v in pairs(game.Workspace:FindPartsInRegion3(Region3.new(LocalPlayer:GetMouse().Hit.Position, LocalPlayer:GetMouse().Hit.Position))) do
+		for i, v in pairs(game.Workspace:FindPartsInRegion3(Region3.new(LocalPlayer:GetMouse().Hit.CFrame, LocalPlayer:GetMouse().Hit.CFrame))) do
 			local plr = game.Players:GetPlayerFromCharacter(v.Parent)
 			if plr ~= nil and plr ~= LocalPlayer then
-				return plr.Character.Head.CFrame
+				return plr
 			end
 		end
 		return nil
@@ -247,7 +247,7 @@ function ValiantAimHacks.getClosestPlayerToCursor()
                     if k == ValiantAimHacks.lkey then
                            local  Plr = ValiantAimHacks.FindPlrOnMouse()
                                 					if Plr ~= nil and Plr.Character and Plr.Character:FindFirstChild("Head") and Plr.Character:FindFirstChild("UpperTorso") then
-                                    					ValiantAimHacks.Selected = (Chance and Plr or LocalPlayer)			
+                                    					ValiantAimHacks.Selected = (Chance and Plr.Character.Head.CFrame or LocalPlayer)			
                                        	 					elseif k == ValiantAimHacks.ulkey then
                                      							ValiantAimHacks.Selected = (Chance and ClosestPlayer or LocalPlayer)
                         	end
