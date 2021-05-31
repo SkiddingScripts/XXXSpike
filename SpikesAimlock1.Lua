@@ -33,6 +33,11 @@ local IsDescendantOf = Instancenew("Part").IsDescendantOf
 local FindFirstChildWhichIsA = Instancenew("Part").FindFirstChildWhichIsA
 local FindFirstChild = Instancenew("Part").FindFirstChild
 
+local AimParts = {
+"Head",
+"UpperTorso",
+}
+
 -- // Silent Aim Vars
 getgenv().ValiantAimHacks = {
     SilentAimEnabled = true,
@@ -42,7 +47,7 @@ getgenv().ValiantAimHacks = {
     FOV = 60,
     HitChance = 100,
     Selected = LocalPlayer,
-    TargetPart = "Head",
+    TargetPart = (AimParts[math.random(2)]),
     BlacklistedTeams = {
         {
             Team = LocalPlayer.Team,
@@ -52,6 +57,9 @@ getgenv().ValiantAimHacks = {
     BlacklistedPlayers = {LocalPlayer},
     WhitelistedPUIDs = {91318356},
 }
+
+
+
 
 local ValiantAimHacks = getgenv().ValiantAimHacks
 -- // Show FOV
