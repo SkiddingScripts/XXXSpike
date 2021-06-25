@@ -57,22 +57,6 @@ getgenv().ValiantAimHacks = {
 
 
 local ValiantAimHacks = getgenv().ValiantAimHacks
-
--- local Enabled = true
--- local StreamProofToggle = false
-
--- Mouse.KeyDown:Connect(function(k)
--- if k == "q" and Enabled then
--- ValiantAimHacks.SilentAimEnabled = false
--- ValiantAimHacks.ShowFOV = false
--- Enabled = false
--- elseif k == "q" and not Enabled then
--- ValiantAimHacks.SilentAimEnabled = true
--- if StreamProofToggle then ValiantAimHacks.ShowFOV = false elseif not StreamProofToggle then ValiantAimHacks.ShowFOV = true end
--- Enabled = true
--- end
--- end)
-
 -- // Show FOV
 local circle = Drawingnew("Circle")
 circle.Transparency = 1
@@ -116,9 +100,11 @@ function ValiantAimHacks.isPartVisible(Part, PartDescendant)
 		local Result = Workspace:Raycast(Origin, Part.Position - Origin, raycastParams)
 		local PartHit = Result.Instance
 		local Visible = (not PartHit or PartHit:IsDescendantOf(PartDescendant))
+
 		-- // Return
 		return Visible
 	end
+
 	-- // Return
 	return false
 end
@@ -211,11 +197,8 @@ function ValiantAimHacks.checkSilentAim()
 	return (ValiantAimHacks.SilentAimEnabled == true and ValiantAimHacks.Selected ~= LocalPlayer)
 end
 
-local isinRadius = nil
-
 -- // Silent Aim Function
 function ValiantAimHacks.getClosestPlayerToCursor()
-
 	-- // Vars
 	local ClosestPlayer = nil
 	local Chance = calcChance(ValiantAimHacks.HitChance)
@@ -246,7 +229,7 @@ function ValiantAimHacks.getClosestPlayerToCursor()
 			-- // Check if is in FOV
 			if (circle.Radius > Magnitude and Magnitude < ShortestDistance) then
 				-- // Check if Visible
-				if (ValiantAimHacks.VisibleCheck and not ValiantAimHacks.isPartVisible(TargetPart, Character)) then continue  end
+				if (ValiantAimHacks.VisibleCheck and not ValiantAimHacks.isPartVisible(TargetPart, Character)) then continue end
 
 				-- //
 				ClosestPlayer = Player
@@ -255,54 +238,14 @@ function ValiantAimHacks.getClosestPlayerToCursor()
 		end
 	end
 
-
-
+	-- // End
 	ValiantAimHacks.Selected = (Chance and ClosestPlayer or LocalPlayer)
-	return Chance, ClosestPlayer, LocalPlayer
 end
 
-
-function ValiantAimHacks.Radius(Player)
-	local Character = ValiantAimHacks.getCharacter(Player)
-	local TargetPart = Character[ValiantAimHacks.TargetPart]
-	local PartPos, _ = CurrentCamera:WorldToViewportPoint(TargetPart.Position)
-	local Magnitude = (Vector2.new(PartPos.X, PartPos.Y) - Vector2.new(Mouse.X, Mouse.Y)).Magnitude
-	local Check = (circle.Radius > Magnitude)
-	return (Check)
-end
-
-function ValiantAimHacks.Visible(Player)
-	local Character = ValiantAimHacks.getCharacter(Player)
-	local TargetPart = Character[ValiantAimHacks.TargetPart]
-	local PartPos, _ = CurrentCamera:WorldToViewportPoint(TargetPart.Position)
-	local Magnitude = (Vector2.new(PartPos.X, PartPos.Y) - Vector2.new(Mouse.X, Mouse.Y)).Magnitude
-	if (ValiantAimHacks.VisibleCheck and ValiantAimHacks.isPartVisible(TargetPart, Character)) then return true end
-end
-
-
-function ValiantAimHacks.ChangePlayer()
-	-- local Chance, Selected, Me = ValiantAimHacks.getClosestPlayerToCursor()
-	local Selected = ValiantAimHacks.Selected
-	if not ValiantAimHacks.SilentAimEnabled then
-		ValiantAimHacks.Selected = (LocalPlayer)
-	else
-		if Selected ~= nil then
-			--local Character = ValiantAimHacks.getCharacter(Selected)
-			--local TargetPart = Character[ValiantAimHacks.TargetPart]
-			if Selected ~= nil and Selected.Character:WaitForChild("BodyEffects") ~= nil and Selected.Character.BodyEffects["K.O"].Value == false and ValiantAimHacks.Radius(Selected) then
-				ValiantAimHacks.Selected = (Selected or LocalPlayer)
-			else
-				ValiantAimHacks.getClosestPlayerToCursor()
-			end
-		else ValiantAimHacks.getClosestPlayerToCursor()
-		end 
-	end
-end
 -- // Heartbeat Function
 Heartbeat:Connect(function()
 	ValiantAimHacks.updateCircle()
-	ValiantAimHacks.ChangePlayer()
-	--	ValiantAimHacks.getClosestPlayerToCursor()
+	ValiantAimHacks.getClosestPlayerToCursor()
 end)
 
 return ValiantAimHacks
